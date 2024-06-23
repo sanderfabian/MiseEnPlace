@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia ="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             xmlns:model="clr-namespace:MiseEnPlace.Model"
+             xmlns:viewModel = "clr-namespace:MiseEnPlace.ViewModels"
+             x:DataType="viewModel:SelectionPageViewModel"
+             Shell.BackgroundColor="{StaticResource MainColor}"
+             BackgroundColor="{StaticResource BGColor}"
+             x:Class="MiseEnPlace.SelectionPage"
+             Title="Mise En Place"
+             >
+
+    <Grid x:Name="GridSelection">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100" x:Name="selectionBox"/>
+            
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout Grid.Row="0">
+            <Frame HorizontalOptions="FillAndExpand" HeightRequest="30" BackgroundColor="{StaticResource MainColor}" CornerRadius="0" BorderColor="{StaticResource MainColor}" HasShadow="True"/>
+            <Frame HorizontalOptions="FillAndExpand" HeightRequest="60" BackgroundColor="Transparent" HasShadow="True" Margin="0,-30,0,10" Padding="0" BorderColor="Transparent">
+                
+                    <CollectionView HeightRequest="50" ItemsLayout="HorizontalList" x:Name="QuickNav" >
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame CornerRadius="5" HeightRequest="50" Padding="5" Margin="10,0,0,0" x:DataType="model:Category" BackgroundColor="{Binding Color}" BorderColor="{Binding Color}" HasShadow="True">
+                                <HorizontalStackLayout>
+
+
+                                    <Image Source="{Binding Image}" HeightRequest="20" Margin="10"  Aspect="AspectFit" />
+
+                                    <Label Text="{Binding Name}" x:Name="CatName" VerticalOptions="Center" HorizontalOptions="Center" Padding="5" FontSize="Small" FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+                                    <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="NavOnTap"></TapGestureRecognizer>
+                                </Frame.GestureRecognizers>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        
+                    </CollectionView>
+                    
+               
+                
+            </Frame>
+        </VerticalStackLayout>
+
+        <CollectionView x:Name="TagHolder" Grid.Row="1" x:DataType="model:Category" HorizontalOptions="Center"  VerticalOptions="Fill" SelectionMode="Single"  Margin="0,10,10,25"  >
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal" SnapPointsAlignment="Start" SnapPointsType="MandatorySingle"></LinearItemsLayout>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Category" >
+                    <Frame BackgroundColor="{StaticResource PrimaryColor}" BorderColor="{StaticResource PrimaryColor}" HasShadow="True" CornerRadius="5" Padding="10" Margin="10,5" WidthRequest="370">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium" TextColor="{StaticResource TextDark}" Margin="5,10,10,10"></Label>
+                            <FlexLayout x:Name="TagViewer"  BindableLayout.ItemsSource="{Binding Items}"  Wrap="Wrap"  MinimumHeightRequest="50" AlignItems="Start" JustifyContent="Start" >
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame  BackgroundColor="{StaticResource PrimaryColor}" x:Name="TagBacking"  CornerRadius="5" HorizontalOptions="FillAndExpand" FlexLayout.Grow="1" Margin="1" Padding="10" BorderColor="{StaticResource SecondaryColor}"  >
+
+                                            <Label x:Name="TagLabel" Text="{Binding .}"  FontSize="Small"  FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Padding="5"/>
+
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="IngredientOnTap" ></TapGestureRecognizer>
+
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+
+                            </FlexLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <Frame Grid.Row="2" BackgroundColor="{StaticResource PrimaryColor}" Padding="10,10,10,0" Margin="0,0,0,-10" BorderColor="{StaticResource PrimaryColor}">
+
+            <Frame.GestureRecognizers>
+                <SwipeGestureRecognizer Swiped="SelectionSwipedUp" Direction="Up"></SwipeGestureRecognizer>
+                <SwipeGestureRecognizer Swiped="SelectionSwipedDown" Direction="Down"></SwipeGestureRecognizer>
+            </Frame.GestureRecognizers>
+            
+            
+            <VerticalStackLayout>
+                <skia:SKLottieView
+                    x:Name="ArrowLottie"
+                                Margin="0"
+                               
+                                HeightRequest="40"
+                                Source="Arrow.json"
+                                RepeatMode="Restart" 
+                                Rotation="-90"
+                                RepeatCount="-1"
+                            >
+
+                </skia:SKLottieView>
+                <Label x:Name="SelectionBoxLabel" Text="Swipe up to review your Selection" HorizontalOptions="Center" FontSize="Default" FontAttributes="Bold" TextColor="{StaticResource TextDark}" Margin="0,0,0,20"></Label>
+
+                <Frame x:Name="Review" IsVisible="false" Padding="5" Margin="0" VerticalOptions="EndAndExpand" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="500"></RowDefinition>
+                            <RowDefinition Height="70"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+
+                        <ScrollView>
+                <FlexLayout x:Name="TagViewer"  Wrap="Wrap" HorizontalOptions="Start" VerticalOptions="Start" MinimumHeightRequest="60" AlignItems="Start" JustifyContent="Start" AlignContent="Start" >
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                                    
+                                        <Frame x:Name="Tag" BackgroundColor="{StaticResource BGColor}" BorderColor="{StaticResource SecondaryColor}" CornerRadius="5" HorizontalOptions="FillAndExpand" FlexLayout.Grow="1" Margin="1" Padding="15"  >
+                                           
+
+                                                <Label x:Name="ViewLabel"  Text="{Binding .}" FontSize="Small"  FontAttributes="Bold" TextColor="{StaticResource TextDark}" HorizontalOptions="Center" HorizontalTextAlignment="Center"  Padding="5"/>
+
+
+                                            
+
+
+                                        </Frame>
+                                        
+                                </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+
+                </FlexLayout>
+                        </ScrollView>
+
+                        <Frame Grid.Row="1" BorderColor="{StaticResource PrimaryColor}" VerticalOptions="End" Margin="0" BackgroundColor="{StaticResource PrimaryColor}" CornerRadius="0" Padding="0,10,0,10">
+                        <FlexLayout HorizontalOptions="FillAndExpand"   MinimumHeightRequest="50" JustifyContent="SpaceEvenly" AlignContent="Stretch"  Padding="0,10,0,10">
+
+                            <Button Text="Confirm"  BackgroundColor="{StaticResource MainColor}" TextColor="{StaticResource TextLight}" FontAttributes="Bold" Margin="5,0,5,0" HeightRequest="50" FlexLayout.Grow="1" Pressed="OnConfirm" >
+                                <Button.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnConfirm"></TapGestureRecognizer>
+                                </Button.GestureRecognizers>
+                            </Button>
+                            <Button Text="Restart" BackgroundColor="{StaticResource TertiaryColor}" TextColor="{StaticResource TextLight}" FontAttributes="Bold" Margin="0,0,5,0" HeightRequest="50" Clicked="RestartOnTap"></Button>
+                        </FlexLayout>
+                    </Frame>
+                    </Grid>
+                </Frame>
+            </VerticalStackLayout>
+                
+        </Frame>
+
+      
+
+
+    </Grid>
+
+
+</ContentPage>

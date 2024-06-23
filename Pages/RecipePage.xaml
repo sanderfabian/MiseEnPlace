@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MiseEnPlace.Pages.RecipePage"
+             Shell.BackgroundColor="{StaticResource MainColor}"
+             xmlns:model="clr-namespace:MiseEnPlace.Model"
+             BackgroundColor="WhiteSmoke"
+             Title="Recipe" x:DataType="model:FullRecipe">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+
+        <Frame BackgroundColor="{StaticResource PrimaryColor}" BorderColor="Transparent" HorizontalOptions="CenterAndExpand" Margin="0" Padding="0" CornerRadius="0" x:DataType="model:FullRecipe">
+            <ScrollView VerticalScrollBarVisibility="Never">
+                <VerticalStackLayout>
+                    <Frame BackgroundColor="{StaticResource PrimaryColor}" CornerRadius="0" Padding="0" Margin="0,0,0,15" HorizontalOptions="Fill" HeightRequest="250" BorderColor="Transparent" >
+                    <VerticalStackLayout>
+                        <Frame Padding="0" CornerRadius="5" Margin="0,-5,0,0">
+                                 <Image Source="{Binding Image}" Aspect="AspectFill" HeightRequest="230" ></Image>
+                        </Frame>
+                        <Frame Margin="10,-25,10,0" ZIndex="3" Padding="0"  BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="50" CornerRadius="0">
+                                <FlexLayout HorizontalOptions="Fill" JustifyContent="SpaceBetween"  Margin="0">
+                                    <Frame  BackgroundColor="{StaticResource PrimaryColor}" BorderColor="{StaticResource PrimaryColor}" HasShadow="True" Padding="10" HeightRequest="40" CornerRadius="5" >
+                                        <HorizontalStackLayout>
+
+                                          
+                                            <Label Text="{Binding Servings}" FontAttributes="Bold" TextColor="{StaticResource TextDark}" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                            <Label Text=" Servings"  TextColor="{StaticResource TextDark}" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        </HorizontalStackLayout>
+                                    </Frame>
+
+                                    <Frame  BackgroundColor="{StaticResource TertiaryColor}" BorderColor="{StaticResource TertiaryColor}" HasShadow="True" Padding="10" HeightRequest="40" CornerRadius="5" >
+                                        <HorizontalStackLayout>
+
+                                            <Label Text="Preparation time: "  TextColor="White" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                            <Label Text="{Binding ReadyInMinutes}" FontAttributes="Bold" TextColor="White" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                                        </HorizontalStackLayout>
+                                    </Frame>
+                                </FlexLayout>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Frame>
+                <Label Text="{Binding Title}" FontAttributes="Bold"   FontSize="Large" TextColor="{StaticResource MainColor}" Margin="10"/>
+                
+                    <Frame BackgroundColor="{StaticResource PrimaryColor}" CornerRadius="5" Padding="10" Margin="10,5" BorderColor="{StaticResource SecondaryColor}">
+                        <VerticalStackLayout>
+                        <Label Text="Summary" FontAttributes="Bold"  FontSize="Subtitle" TextColor="{StaticResource TextDark}" Margin="5"/>
+                        <Label Text="{Binding Summary}" FontSize="Body" TextColor="{StaticResource TextDark}" Margin="5" ></Label>
+                        </VerticalStackLayout>
+                </Frame>
+                    <Frame BorderColor="{StaticResource SecondaryColor}"  CornerRadius="5" Padding="10" Margin="10,5" >
+                        <VerticalStackLayout>
+
+                            <Label Text="Ingredients" FontAttributes="Bold"  FontSize="Subtitle" TextColor="{StaticResource TextDark}" Margin="5"/>
+                            <FlexLayout  BindableLayout.ItemsSource="{Binding ExtendedIngredients}"  Wrap="Wrap"  MinimumHeightRequest="50" AlignItems="Start" JustifyContent="SpaceBetween" >
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame  BackgroundColor="{StaticResource SecondaryColor}" x:DataType="model:ExtendedIngredient" x:Name="TagBacking"  CornerRadius="5" HorizontalOptions="FillAndExpand" FlexLayout.Grow="1" Margin="1" Padding="20,15" BorderColor="{StaticResource TertiaryColor}" >
+
+                                            <Label x:Name="TagLabel" Text="{Binding Name}"  FontSize="Small"  FontAttributes="Bold" TextColor="{StaticResource TextDark}" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Padding="10"/>
+
+
+                                        </Frame>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+
+                            </FlexLayout>
+                        </VerticalStackLayout>
+
+                    </Frame>
+                    <Frame BorderColor="{StaticResource SecondaryColor}" CornerRadius="5" Padding="10" Margin="10,5" >
+                        <VerticalStackLayout>
+
+                            <Label Text="Measurements" FontAttributes="Bold"  FontSize="Subtitle" TextColor="{StaticResource TextDark}" Margin="5"/>
+                            <FlexLayout  BindableLayout.ItemsSource="{Binding ExtendedIngredients}"  Wrap="Wrap"  MinimumHeightRequest="50" AlignItems="Start" Direction="Row" JustifyContent="SpaceBetween"  >
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame  BackgroundColor="Transparent"  x:Name="TagBacking"  CornerRadius="5" HorizontalOptions="Fill" FlexLayout.Grow="1" MinimumWidthRequest="250" Padding="0,5"  BorderColor="Transparent" x:DataType="model:ExtendedIngredient" >
+                                            <HorizontalStackLayout>
+                                                <Label  Text="{Binding Amount}"  FontSize="Small" MinimumWidthRequest="50"  FontAttributes="Bold" TextColor="{StaticResource TextDark}" HorizontalOptions="Start"  VerticalTextAlignment="Center" Padding="5" HorizontalTextAlignment="Start" x:DataType="model:Metric"/>
+                                                <Label Text="Count"  FontSize="Small"  FontAttributes="Bold"  HorizontalOptions="Start" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Padding="5" x:DataType="model:Metric"/>
+                                                <Label Text="{Binding UnitLong}"  FontSize="Small"  FontAttributes="Bold" TextColor="{StaticResource TextDark}" HorizontalOptions="Start" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Padding="5" x:DataType="model:Us"/>
+                                                
+                                                <Label x:Name="TagLabel" Text="{Binding Name}"  FontSize="Small"  FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Padding="5"/>
+                                            </HorizontalStackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+
+                            </FlexLayout>
+                        </VerticalStackLayout>
+
+                    </Frame>
+
+                    <Frame BorderColor="{StaticResource SecondaryColor}" CornerRadius="5" Padding="10" Margin="10,5" >
+                        <VerticalStackLayout>
+                            <Label Text="Instructions" FontAttributes="Bold"  FontSize="Subtitle" TextColor="{StaticResource TextDark}" Margin="5"/>
+                            <Label Text="{Binding Instructions}" FontSize="Body" TextColor="{StaticResource TextDark}" Margin="5" ></Label>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                </VerticalStackLayout>
+            </ScrollView>
+            
+            
+            
+        </Frame>
+        
+
+
+    </Grid>
+
+    
+
+
+    
+
+</ContentPage>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Your Results"
+             Shell.BackgroundColor="{StaticResource MainColor}"
+             xmlns:model="clr-namespace:MiseEnPlace.Model"
+             xmlns:viewmodel="clr-namespace:MiseEnPlace.ViewModels"
+             x:DataType="viewmodel:ResultPageViewModel"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             BackgroundColor="WhiteSmoke"
+             x:Class="MiseEnPlace.ResultPage"
+             >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+
+            <RowDefinition Height=" Auto"/>
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout Grid.Row="0">
+            
+            <Frame BackgroundColor="{StaticResource MainColor}" HeightRequest="30" HorizontalOptions="Fill" CornerRadius="0" BorderColor="{StaticResource MainColor}"></Frame>
+            <ActivityIndicator 
+                    HeightRequest="{Binding ActivityHeight}"
+                    IsRunning="{Binding IsBusy}"
+                    Margin="0"
+                    WidthRequest="50"
+                    Color="{StaticResource MainColor}"
+                />
+            <CollectionView ItemsSource="{Binding MyRoots}" Margin="0,-30,0,0" ItemsLayout="HorizontalList" x:Name="myCollection">
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:FullRecipe">
+                        <Frame BackgroundColor="White" WidthRequest="373" HeightRequest="650" Margin="10,5,5,5" Padding="10" HasShadow="True" BorderColor="White">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="55"/>
+                                </Grid.RowDefinitions>
+                                <Frame HeightRequest="250" HorizontalOptions="Fill" Padding="0" Margin="0,0,0,5" BorderColor="Transparent">
+                                    <VerticalStackLayout>
+                                        <Frame Padding="0" >
+                                            <Image Source="{Binding Image}" HeightRequest="230" Aspect="AspectFill" ></Image>
+                                        </Frame>
+
+                                        <Frame Margin="0,-25,0,0" ZIndex="3" Padding="10,0"  BackgroundColor="Transparent" BorderColor="Transparent">
+                                            <FlexLayout HorizontalOptions="Fill" JustifyContent="SpaceBetween"  Margin="0">
+                                                <Frame  BackgroundColor="{StaticResource PrimaryColor}" BorderColor="{StaticResource PrimaryColor}" HasShadow="True" Padding="10" HeightRequest="40" CornerRadius="5" >
+                                                    <HorizontalStackLayout>
+                                                        <Label Text="{Binding Servings}" FontAttributes="Bold" TextColor="{StaticResource TextDark}" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                                        <Label Text=" Servings"  TextColor="{StaticResource TextDark}" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                                    </HorizontalStackLayout>
+                                                </Frame>
+                                                <Frame  BackgroundColor="{StaticResource TertiaryColor}" BorderColor="{StaticResource TertiaryColor}" HasShadow="True" Padding="10" HeightRequest="40" >
+                                                    <HorizontalStackLayout>
+                                                       
+                                                        <Label Text="Preperation time: "  TextColor="White" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                                        <Label Text="{Binding ReadyInMinutes}"  TextColor="White" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center"/>                                                    
+                                                    
+                                                    </HorizontalStackLayout>
+                                                    
+                                                </Frame>
+                                            </FlexLayout>
+                                        </Frame>
+                                    </VerticalStackLayout>
+                                </Frame>
+                                <VerticalStackLayout Grid.Row="1" Margin="10" >
+                                    <Label Text="{Binding Title}" HorizontalOptions="Center" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="10"/>
+                                    <Label TextColor="#333" HorizontalTextAlignment="Center" Margin="5" MaxLines="13">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Summary}" />
+                                                <Span Text=" other text" FontAttributes="Bold" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    
+                                </VerticalStackLayout>
+                                <Frame Background="White" Grid.Row="2" BorderColor="Transparent" Padding="2">
+                                    <Button Text="Read More" BackgroundColor="{StaticResource MainColor}" TextColor="White" Clicked="Button_Clicked"/>
+                                </Frame>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+           
+        </VerticalStackLayout>
+        <Frame Grid.Row="1" BackgroundColor="Transparent" CornerRadius="0" BorderColor="Transparent" Padding="10">
+            <VerticalStackLayout>
+                <Label Text="Swipe through your results" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" Margin="10"></Label>
+                <skia:SKLottieView
+                                Source="Arrow.json"
+                                HeightRequest="20"
+                                RepeatCount="-1"
+                                ></skia:SKLottieView>
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MiseEnPlace.Resources.Styles.MiseEnPlaceTheme">
+    <Color x:Key="PrimaryColor">#fff</Color>
+    <Color x:Key="SecondaryColor">#B2A5B7</Color>
+    <Color x:Key="TertiaryColor">#362d39</Color>
+    <Color x:Key="MainColor">#453a49</Color>
+    <Color x:Key="CancelColor">#F8805F</Color>
+
+
+    <Color x:Key="BGColor">#F5F5F5</Color>
+    <Color x:Key="TextDark">#37323E</Color>
+    <Color x:Key="TextLight">#fff</Color>
+
+</ResourceDictionary>

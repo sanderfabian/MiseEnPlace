@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MiseEnPlace.Pages.LoadingPage"
+             BackgroundColor="White"
+             xmlns:skia ="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             Title="LoadingPage">
+    <FlexLayout VerticalOptions="FillAndExpand" BackgroundColor="White" JustifyContent="Center" AlignContent="Center">
+        <Frame >
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Label 
+            Text="Mise En Place"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            FontAttributes="Bold"
+            FontSize="Header"
+                    TextColor="{StaticResource TextDark}"
+            />
+                <skia:SKLottieView
+            
+            Source="LoadPan.json"
+            RepeatCount="-1"
+            HeightRequest="100"
+            RepeatMode="Restart"
+            
+            >
+
+                </skia:SKLottieView>
+            </VerticalStackLayout>
+            
+        </Frame>
+      
+        
+       
+    </FlexLayout>
+</ContentPage>
