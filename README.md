@@ -5,28 +5,46 @@
 Mise En Place is a .Net MAUI mobile application that uses SpoonacularAPI to retrieve recipes based on the Ingredients available to the users.
 ## Images
 ### Startup & Ingredient Selection
-![Overview](https://github.com/sanderfabian/MiseEnPlace/blob/main/Images/StartUp.png)
-![Overview]( https://github.com/sanderfabian/MiseEnPlace/blob/main/Images/Ingredient%20selecter.png)<br>
+![Startup & Ingredient Selection](https://github.com/sanderfabian/MiseEnPlace/assets/145095620/fa22c20e-bef9-4187-b754-cd77da073167)<br>
+
+
 Choose from a variety of options catalogued into distinct categories. <br>
-![Overview](https://github.com/sanderfabian/MiseEnPlace/blob/main/Images/Beef.png)
-![Overview](https://github.com/sanderfabian/MiseEnPlace/blob/main/Images/SelectionReview.png)<br>
+
+---
+
+### Select & Review
+
+
+![Frame 88](https://github.com/sanderfabian/MiseEnPlace/assets/145095620/0ab539d2-b8eb-4351-9472-d53de0aa5d91)<br>
+
+
 Review your selection and send it!<br>
-![QuickSelect](https://github.com/sanderfabian/MiseEnPlace/blob/main/Images/Quick%20Select.png)<br>
+
+
+![quick (1)](https://github.com/sanderfabian/MiseEnPlace/assets/145095620/cd463dd1-c7ef-46a8-b8ca-4f4d6b0805cd)<br>
+
+
 A quick Navigation option to select category pages.<br>
+
+---
 
 ### Getting your Recipes
 Based on your Selected tags Mise En Place will pull recipes from Spoonacular to fit your requirements
-![Overview](https://github.com/sanderfabian/MiseEnPlace/blob/main/Images/LoadingRecipes.png)
-![Overview](https://github.com/sanderfabian/MiseEnPlace/blob/main/Images/Results.png)<br>
-After loading, your results will be presented.<br>
-![Overview](https://github.com/sanderfabian/MiseEnPlace/blob/main/Images/SwipeThru.png)<br>
+
+![swipe](https://github.com/sanderfabian/MiseEnPlace/assets/145095620/8fe8fdd8-bb08-45ea-b29c-e3e585122fea)<br>
+
+
+After loading, your results will be presented.
 Swipe through your available options!
+
+---
 
 ### Reading your Recipes
 Recipes are displayed in detail:<br>
-![Overview](https://github.com/sanderfabian/MiseEnPlace/blob/main/Images/Recipe1.png)
-![Overview](https://github.com/sanderfabian/MiseEnPlace/blob/main/Images/Recipe2.png)
-![Overview](https://github.com/sanderfabian/MiseEnPlace/blob/main/Images/Recipe3.png)
+
+![Scroll](https://github.com/sanderfabian/MiseEnPlace/assets/145095620/5d319aa5-f18e-46f1-8530-dcb77e959442)
+
+
 
 ## Add your Spoonacular APIkey
 BaseViewModel
